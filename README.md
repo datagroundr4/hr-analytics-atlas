@@ -264,7 +264,7 @@ hr-analytics-atlas/
 └── insights/
     └── executive_summary.md
 ```
-
+└
 ## 🔗 Portfolio & Contact
 
 | | |
