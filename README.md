@@ -13,7 +13,7 @@
 
 ## 🎯 Business Problem
 
-Atlas Lab needed visibility into employee attrition to move from reactive HR decisions to proactive retention strategy. Without understanding *who* was leaving, *wht*, or *when* in the employee lifecycle attrition was most likely to occur, interventions were untargeted and ineffective.
+Atlas Lab needed visibility into employee attrition to move from reactive HR decisions to proactive retention strategy. Without understanding *who* was leaving, *why*, or *when* in the employee lifecycle attrition was most likely to occur, interventions were untargeted and ineffective.
 
 **This project answers three core questions:**
 - What organizational and demographic factors most strongly predict attrition?
@@ -30,7 +30,7 @@ Contains annual employee performance reviews, enabling Atlas Lab to track and ma
 | Attribute | Detail |
 |-----------|--------|
 | Source | Atlas Lab HR Dataset |
-| Records | ~1,400 employees (active + former) |
+| Records | ~1,200 employees (active + former) |
 | Key variables | PerformanceID, EmployeeID, ReviewDate, EnvironmentSatisfaction |
 | Target variable | Attrition (Yes / No) — resolved via `DimEmployee` |
 
@@ -96,8 +96,7 @@ The final model contains **10 individual relationships** across 6 tables.
 
 ## 🔍 Key Findings
 
-Attrition rate of 16.12%
-Averarge Salary = $106,133
+**Overall metrics:** Attrition rate of **16.12%** · Averarge Salary **$106,133**
 
 | Insight | Business Implication |
 |---------|----------------------|
@@ -238,9 +237,13 @@ FullName = DimEmployee[FirstName] & " " & DimEmployee[LastName]
 ```
 
 ### Dashboard Design Decisions
-- Used a **risk matrix** visual (scatter plot: satisfaction vs. overtime) to surface the highest-risk employee segment at a glance
-- Separated **operational HR view** (managers) from **strategic view** (C-suite) using bookmarks and page navigation
-- Color coding: red = attrition risk, blue = retention strenght — consistent throughout all visuals for cognitve ease
+
+- Selected chart-types based on the analytical question each visual answers:
+    - Bar charts for categorical comparisons (department, job role, overtime)
+    - Line charts for trend analysis over time and across categories.
+    - Clustered columns for multi-variable breakdowns (business travel conditions, ethnicity, job role)
+- Implemented drill-up and drill-down navigation on date hierarchy (year -> quarter) and job role hierarchy (department -> job role), allowing user to move between summary and granular views without leaving the page.
+- Applied a custom corporate color pallete aligned with Atlas Lab's brand identity, ensuring the report feels like an internal business asset rather than a generic template.
 
 ---
 
@@ -256,7 +259,8 @@ hr-analytics-atlas/
 ├── README.md
 ├── dashboard/
 │   └── screenshots/
-│       └── overview.png
+│       ├── overview.png
+│       └── snowflake_data_model.png
 └── insights/
     └── executive_summary.md
 ```
